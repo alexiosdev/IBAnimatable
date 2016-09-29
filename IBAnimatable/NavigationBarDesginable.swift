@@ -1,6 +1,6 @@
 //
 //  Created by Jake Lin on 12/10/15.
-//  Copyright © 2015 Jake Lin. All rights reserved.
+//  Copyright © 2015 IBAnimatable. All rights reserved.
 //
 
 import UIKit
@@ -13,16 +13,16 @@ public protocol NavigationBarDesignable {
 }
 
 public extension NavigationBarDesignable where Self: UINavigationBar {
-  public func configNavigationBar() {
+  public func configureNavigationBar() {
     if solidColor {
       let emptyImage = UIImage()
-      setBackgroundImage(emptyImage, forBarPosition: .Any, barMetrics: .Default)
+      setBackgroundImage(emptyImage, for: .any, barMetrics: .default)
       shadowImage = emptyImage
       // Need to manually untick translucent in Interface Builder, 
       // otherwise, it will have constrait issue in IB although it is correct in run time.
       // translucent = false
     } else {
-      setBackgroundImage(nil, forBarPosition: .Any, barMetrics: .Default)
+      setBackgroundImage(nil, for: .any, barMetrics: .default)
       shadowImage = nil
     }
   }

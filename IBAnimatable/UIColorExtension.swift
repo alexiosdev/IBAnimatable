@@ -1,16 +1,16 @@
 //
 //  Created by Tom Baranes on 09/02/16.
-//  Copyright © 2016 Jake Lin. All rights reserved.
+//  Copyright © 2016 IBAnimatable. All rights reserved.
 //
 
 import UIKit
 
-extension UIColor {
+public extension UIColor {
   
-  convenience init(hexString: String) {
-    let hex = hexString.stringByTrimmingCharactersInSet(NSCharacterSet.alphanumericCharacterSet().invertedSet)
+  public convenience init(hexString: String) {
+    let hex = hexString.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
     var int = UInt32()
-    NSScanner(string: hex).scanHexInt(&int)
+    Scanner(string: hex).scanHexInt32(&int)
     let a, r, g, b: UInt32
     switch hex.characters.count {
     case 3:

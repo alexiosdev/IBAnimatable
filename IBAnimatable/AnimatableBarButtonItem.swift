@@ -1,23 +1,23 @@
 //
 //  Created by Jake Lin on 12/16/15.
-//  Copyright © 2015 Jake Lin. All rights reserved.
+//  Copyright © 2015 IBAnimatable. All rights reserved.
 //
 
 import UIKit
 
-@IBDesignable public class AnimatableBarButtonItem: UIBarButtonItem, BarButtonItemDesignable, Animatable {
+@IBDesignable open class AnimatableBarButtonItem: UIBarButtonItem, BarButtonItemDesignable, Animatable {
   // MARK: - BarButtonItemDesignable
-  @IBInspectable public var roundedImage: UIImage?
+  @IBInspectable open var roundedImage: UIImage?
   
   // MARK: - Lifecycle
-  public override func prepareForInterfaceBuilder() {
+  open override func prepareForInterfaceBuilder() {
     super.prepareForInterfaceBuilder()
-    configInspectableProperties()
+    configureInspectableProperties()
   }
   
-  public override func awakeFromNib() {
+  open override func awakeFromNib() {
     super.awakeFromNib()
-    configInspectableProperties()
+    configureInspectableProperties()
   }
 
   // TODO: animations
@@ -28,20 +28,22 @@ import UIKit
 //  }
   
   // MARK: - Animatable
-  @IBInspectable public var animationType: String?
-  @IBInspectable public var autoRun: Bool = true
-  @IBInspectable public var duration: Double = Double.NaN
-  @IBInspectable public var delay: Double = Double.NaN
-  @IBInspectable public var damping: CGFloat = CGFloat.NaN
-  @IBInspectable public var velocity: CGFloat = CGFloat.NaN
-  @IBInspectable public var force: CGFloat = CGFloat.NaN
-  @IBInspectable public var repeatCount: Float = Float.NaN
-  @IBInspectable public var x: CGFloat = CGFloat.NaN
-  @IBInspectable public var y: CGFloat = CGFloat.NaN
+  open var animationType: AnimationType = .none
+  @IBInspectable var _animationType: String? {
+    didSet {
+      animationType = AnimationType(string: _animationType)
+    }
+  }
+  @IBInspectable open var autoRun: Bool = true
+  @IBInspectable open var duration: Double = Double.nan
+  @IBInspectable open var delay: Double = Double.nan
+  @IBInspectable open var damping: CGFloat = CGFloat.nan
+  @IBInspectable open var velocity: CGFloat = CGFloat.nan
+  @IBInspectable open var force: CGFloat = CGFloat.nan
   
   // MARK: - Private
-  private func configInspectableProperties() {
-//    configAnimatableProperties()
+  fileprivate func configureInspectableProperties() {
+//    configureAnimatableProperties()
     confingBarButtonItemImage()
   }
 }

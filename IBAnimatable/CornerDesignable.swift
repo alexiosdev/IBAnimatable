@@ -1,6 +1,6 @@
 //
 //  Created by Jake Lin on 12/1/15.
-//  Copyright © 2015 Jake Lin. All rights reserved.
+//  Copyright © 2015 IBAnimatable. All rights reserved.
 //
 
 import UIKit
@@ -13,7 +13,7 @@ public protocol CornerDesignable {
 }
 
 public extension CornerDesignable where Self: UIView {
-  public func configCornerRadius() {
+  public func configureCornerRadius() {
     if !cornerRadius.isNaN && cornerRadius > 0 {
       layer.cornerRadius = cornerRadius
     }

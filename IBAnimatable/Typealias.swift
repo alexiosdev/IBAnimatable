@@ -1,10 +1,10 @@
 //
 //  Created by Jake Lin on 2/23/16.
-//  Copyright © 2016 Jake Lin. All rights reserved.
+//  Copyright © 2016 IBAnimatable. All rights reserved.
 //
 
 import Foundation
 
 public typealias AnimatableCompletion = () -> Void
 public typealias AnimatableExecution = () -> Void
-public typealias Duration = NSTimeInterval
+public typealias Duration = TimeInterval

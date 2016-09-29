@@ -1,13 +1,13 @@
 //
 //  Created by Tom Baranes on 03/04/16.
-//  Copyright © 2016 Jake Lin. All rights reserved.
+//  Copyright © 2016 IBAnimatable. All rights reserved.
 //
 
 import UIKit
 
-public class PresentExplodeSegue: UIStoryboardSegue {
-  public override func perform() {
-    destinationViewController.transitioningDelegate = PresenterManager.sharedManager().retrievePresenter(.Explode(params: []))
-    sourceViewController.presentViewController(destinationViewController, animated: true, completion: nil)
+open class PresentExplodeSegue: UIStoryboardSegue {
+  open override func perform() {
+    destination.transitioningDelegate = TransitionPresenterManager.sharedManager().retrievePresenter(transitionAnimationType: .explode(xFactor: nil, minAngle: nil, maxAngle: nil))
+    source.present(destination, animated: true, completion: nil)
   }
 }

@@ -1,6 +1,6 @@
 //
 //  Created by Tom Baranes on 07/05/16.
-//  Copyright © 2016 Jake Lin. All rights reserved.
+//  Copyright © 2016 IBAnimatable. All rights reserved.
 //
 
 import UIKit
@@ -13,14 +13,14 @@ class ContainerTransitionViewController: UIViewController, UITabBarDelegate {
   @IBOutlet var tabBar: UITabBar!
   @IBOutlet var containerView: UIView!
   
-  private var viewControllers = [AnimatableViewController]()
-  private var currentViewController: AnimatableViewController?
+  fileprivate var viewControllers = [AnimatableViewController]()
+  fileprivate var currentViewController: AnimatableViewController?
   
   // MARK: Life cycle
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    createChildViewControllers()
+    makeChildViewControllers()
     tabBar.selectedItem = tabBar.items?.first
   }
   
@@ -30,37 +30,32 @@ class ContainerTransitionViewController: UIViewController, UITabBarDelegate {
 
 private extension ContainerTransitionViewController {
   
-  func createChildViewControllers() {
+  func makeChildViewControllers() {
     var viewController = AnimatableViewController()
-    viewController.view.backgroundColor = UIColor.blueColor()
-    viewController.transitionAnimationType = "Explode"
+    viewController.view.backgroundColor = .blue
+    viewController.transitionAnimationType = .explode(xFactor: nil, minAngle: nil, maxAngle: nil)
     viewControllers.append(viewController)
    
     viewController = AnimatableViewController()
-    viewController.view.backgroundColor = UIColor.greenColor()
-    viewController.transitionAnimationType = "Fold"
+    viewController.view.backgroundColor = .green
+    viewController.transitionAnimationType = .fold(from: .right, folds: nil)
     viewControllers.append(viewController)
 
     viewController = AnimatableViewController()
-    viewController.view.backgroundColor = UIColor.yellowColor()
-    viewController.transitionAnimationType = "NatGeo"
+    viewController.view.backgroundColor = .yellow
+    viewController.transitionAnimationType = .natGeo(to: .right)
     viewControllers.append(viewController)
     
     viewController = AnimatableViewController()
-    viewController.view.backgroundColor = UIColor.redColor()
-    viewController.transitionAnimationType = "Portal"
+    viewController.view.backgroundColor = .red
+    viewController.transitionAnimationType = .portal(direction: .backward, zoomScale: nil)
     viewControllers.append(viewController)
     
     cycleFromViewController(containerView, fromViewController: nil, toViewController: viewControllers[0])
-
   }
   
-  func cycleFromViewController(containerView: UIView, fromViewController: AnimatableViewController?, toViewController: AnimatableViewController) {
-    guard let animationType = TransitionAnimationType.fromString(toViewController.transitionAnimationType ?? "") else {
-      return
-    }
-    
-    let transitionContext = ContainerTransition(animationType: animationType,
+  func cycleFromViewController(_ containerView: UIView, fromViewController: AnimatableViewController?, toViewController: AnimatableViewController) {
+    let transitionContext = ContainerTransition(animationType: toViewController.transitionAnimationType,
                                                 container: containerView,
                                                 parentViewController: self,
                                                 fromViewController: fromViewController,
@@ -76,7 +71,8 @@ private extension ContainerTransitionViewController {
 
 extension ContainerTransitionViewController {
 
-  func tabBar(tabBar: UITabBar, didSelectItem item: UITabBarItem) {
+  @objc(tabBar:didSelectItem:)
+  func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
     let toViewController = viewControllers[item.tag]
     cycleFromViewController(containerView, fromViewController: currentViewController, toViewController: toViewController)
   }
